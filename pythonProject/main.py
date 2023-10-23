@@ -26,6 +26,16 @@ if __name__=='__main__':
                 self.move_d *= -1
                 self.move_c *= self.move_d
 
+    class Abalas(pygame.sprite.Sprite):
+        def __init__(self, x, y):
+            pygame.sprite.Sprite.__init__(self)
+            self.image = pygame.image.load("bullet.png")
+            self.rect = self.image.get_rect()
+            self.rect.center = [x, y]
+        def update(self):
+            self.rect.y += 3
+            if self.rect.top > tela_y:
+                self.kill()
     class Balas(pygame.sprite.Sprite):
         def __init__(self, x, y):
             pygame.sprite.Sprite.__init__(self)
@@ -36,6 +46,10 @@ if __name__=='__main__':
             self.rect.y -= 5
             if self.rect.bottom < 0:
                 self.kill()
+            if pygame.sprite.spritecollide(self, alien_group, True):
+                pass
+                self.kill()
+
     class Nave(pygame.sprite.Sprite):
         def __init__(self,x,y,vida):
             pygame.sprite.Sprite.__init__(self)
